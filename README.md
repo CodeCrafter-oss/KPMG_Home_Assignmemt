@@ -1,6 +1,6 @@
 # README
 
-This repository contains **two independent components** that can be used together or separately:
+This repository contains **two components** that can be used together or separately:
 
 * **Part 1 — OCR → Field Extraction (Streamlit):** Upload a scanned form (PDF/JPG/PNG), run **Azure Document Intelligence** OCR, then use **Azure OpenAI (GPT-4o)** to extract a **strict JSON** (Hebrew/English aware) via prompts and light validation.
 * **Part 2 — HMO RAG Chatbot (FastAPI + Gradio):** Build a local knowledge base from your `.html` files, create embeddings with **Azure OpenAI**, rank by **cosine similarity**, and expose a small **chat UI** for bilingual Q\&A. The Gradio UI is configured to **hide the raw sources** and show only the final answer.
@@ -260,5 +260,6 @@ curl -X POST "http://127.0.0.1:8000/qa" \
 * **Output not valid JSON (Part 1)** — The UI shows raw model output and validation issues; re-run or tune prompts.
 
 ---
+
 
 
