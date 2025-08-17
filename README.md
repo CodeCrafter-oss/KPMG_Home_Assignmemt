@@ -27,7 +27,7 @@ This repository contains **two independent components** that can be used togethe
 
 ```
 hmp-OCR-part1/
-  phase1_data/       # put your PDF here
+  phase1_data/       # put your PDF/JPG/PNG here
   app_streamlit.py
   extract_fields.py
   modules/
@@ -261,10 +261,4 @@ curl -X POST "http://127.0.0.1:8000/qa" \
 
 ---
 
-## Notes & conventions
-
-* Server is stateless: client sends **entire history** and **user profile** each call.
-* Gradio UI intentionally **hides `sources`** from `/qa`; only the final answer is shown.
-* Prompts are bilingual and keep the user’s language (HE/EN).
-* For reproducibility, rely on the pinned `requirements.txt`.
 
