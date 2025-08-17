@@ -25,6 +25,7 @@ This repository contains **two independent components** that can be used togethe
 
 ```
 part1/
+  phase1_data        # put your pdf files here
   app_streamlit.py
   extract_fields.py
   ocr_module.py
@@ -34,7 +35,7 @@ part1/
     prompt_en.txt
     translate_json_fields_prompt.txt  (or translate_json_fields.txt)
   uploads/             # created at runtime
-  .env                 # your secrets (git-ignored)
+ 
 
 part2/
   embed_texts.py
@@ -48,9 +49,9 @@ part2/
     qa_bilingual.txt
   phase2_data/         # put your .html files here
   index/               # built index JSON (created by embed_texts.py)
-  .env
 
 requirements.txt       # unified deps for both parts
+ .env                 # your secrets (git-ignored)
 ```
 
 ---
@@ -239,4 +240,5 @@ curl -X POST "http://127.0.0.1:8000/qa" \
 - For reproducibility in production, consider pinning exact package versions (already captured in `requirements.txt`) and using a lockfile.
 
 ---
+
 
