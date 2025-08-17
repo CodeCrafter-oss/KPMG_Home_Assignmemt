@@ -76,28 +76,53 @@ pip install -r requirements.txt
 This installs all dependencies for **both** Part 1 and Part 2.
 
 ---
+Got it. Here’s a **clean, copy-paste** README section you can drop in, with a **single general .env template for all parts** (placeholders only, using `<…>`). I also added a tiny addendum for **Part 1** (OCR) so you don’t forget the two DI keys.
 
-# Part 1 — OCR → Field Extraction (Streamlit)
+---
 
-### 1) Environment variables (`hmp-OCR-part1/.env`)
+## Environment variables (.env) — General (all parts)
 
-```
-# --- Azure Document Intelligence (OCR) ---
-AZURE_DOCUMENTINTELLIGENCE_ENDPOINT=https://<your-di>.cognitiveservices.azure.com/
-AZURE_DOCUMENTINTELLIGENCE_KEY=<your-di-key>
-# (legacy fallback also supported: AZURE_ENDPOINT / AZURE_KEY)
+> Keep real secrets only in local `.env` files (don’t commit).
+> No spaces around `=` in dotenv files.
 
-# --- Azure OpenAI (Chat Completions) ---
+```ini
+# --- Azure OpenAI ---
 AZURE_OPENAI_ENDPOINT=https://<your-aoai>.openai.azure.com/
 AZURE_OPENAI_KEY=<your-aoai-key>
 AZURE_OPENAI_API_VERSION=2024-06-01
 
-# Chat deployment name
-AZURE_OPENAI_DEPLOYMENT=gpt-4o
-# (modular pipeline also accepts AZURE_OPENAI_DEPLOYMENT_GPT4O=gpt-4o)
+# Exact deployment names (from Azure AI Foundry → Deployments)
+AZURE_OPENAI_CHAT_DEPLOYMENT=<your-chat-deployment-name>            # e.g., gpt-4o
+AZURE_OPENAI_EMBEDDINGS_DEPLOYMENT=<your-embeddings-deployment>     # e.g., text-embedding-3-large
+
+# --- RAG data & index ---
+DATA_DIR=<your-data-dir>                       # e.g., phase2_data
+INDEX_PATH=<your-index-json-path>              # e.g., index/phase2_index.json
+
+# --- App auth & URLs (Part 2 API/UI) ---
+API_KEY=<your-local-api-key>                   # e.g., dev-key
+API_URL=http://127.0.0.1:8000
+
+# --- Gradio (UI runtime) ---
+GRADIO_SERVER=127.0.0.1
+GRADIO_PORT=7860
+GRADIO_SHARE=false
 ```
 
-### 2) Run the UI (Part 1)
+### Only for Part 1 (OCR UI)
+
+```ini
+# --- Document Intelligence (OCR) ---
+AZURE_DOCUMENTINTELLIGENCE_ENDPOINT=https://<your-di>.cognitiveservices.azure.com/
+AZURE_DOCUMENTINTELLIGENCE_KEY=<your-di-key>
+```
+
+> You can keep **one** `.env` at the repo root and both parts will read from it, or place a copy in each part’s folder if you prefer.
+----
+# Part 1 — OCR → Field Extraction (Streamlit)
+
+
+### 1) Run the UI (Part 1)
 
 ```bash
 cd hmp-OCR-part1
@@ -260,6 +285,7 @@ curl -X POST "http://127.0.0.1:8000/qa" \
 * **Output not valid JSON (Part 1)** — The UI shows raw model output and validation issues; re-run or tune prompts.
 
 ---
+
 
 
 
