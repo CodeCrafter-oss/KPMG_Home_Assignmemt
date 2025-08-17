@@ -221,11 +221,6 @@ python gradio_app.py
 
    * The API formats Top-K chunks into a numbered CONTEXT block, adds the user profile (if any), and asks GPT-4o to answer **only from the provided context**.
 
-**Why normalization?**
-Unit-length vectors turn dot-product into cosine similarity and stabilize scoring across documents; the code normalizes both the stored vectors and the query vector before ranking.
-
-### (IR note)
-
 This is a **semantic information-retrieval** pipeline: instead of matching keywords, it retrieves by **meaning** using embeddings and cosine similarity. It excels when users phrase questions differently from the documents (synonyms, paraphrases, typos, bilingual queries). For exact keyword scenarios you can add a **lexical IR** layer (e.g., BM25) and fuse results (RRF/MMR) for a **hybrid IR** setup.
 
 ---
@@ -272,3 +267,4 @@ curl -X POST "http://127.0.0.1:8000/qa" \
 * Gradio UI intentionally **hides `sources`** from `/qa`; only the final answer is shown.
 * Prompts are bilingual and keep the user’s language (HE/EN).
 * For reproducibility, rely on the pinned `requirements.txt`.
+
