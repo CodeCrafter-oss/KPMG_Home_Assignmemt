@@ -76,11 +76,8 @@ pip install -r requirements.txt
 This installs all dependencies for **both** Part 1 and Part 2.
 
 ---
-Got it. Here’s a **clean, copy-paste** README section you can drop in, with a **single general .env template for all parts** (placeholders only, using `<…>`). I also added a tiny addendum for **Part 1** (OCR) so you don’t forget the two DI keys.
 
----
-
-## Environment variables (.env) — General (all parts)
+## Environment variables (.env) —All parts
 
 > Keep real secrets only in local `.env` files (don’t commit).
 > No spaces around `=` in dotenv files.
@@ -285,6 +282,7 @@ curl -X POST "http://127.0.0.1:8000/qa" \
 * **Output not valid JSON (Part 1)** — The UI shows raw model output and validation issues; re-run or tune prompts.
 
 ---
+
 
 
 
