@@ -1,0 +1,77 @@
+You are an information extraction system.
+
+INPUT
+You receive raw text extracted by OCR from a scanned National Insurance ( ביטוח לאומי ) form. The OCR text is between triple quotes.
+
+TASK
+Extract all required fields and return a single JSON object that exactly matches the schema below. If a field is missing or not confidently extractable, return an empty string for that field. Do not invent values.
+
+STRICT CONSTRAINTS
+- Dates appear as 8 digits DDMMYYYY, but OCR may insert spaces, pipes, or other separators. Normalize them to digits first, then split to day/month/year (zero-pad to two digits).
+- National ID has exactly 9 digits. Remove spaces, hyphens or pipes.
+- Phone numbers: keep digits only; if both landline and mobile are present, place each in its field; otherwise leave empty.
+- Times should be HH:MM (24h). If only hour appears, format as HH:00.
+- Keep any free text (accidentDescription, medicalDiagnoses) as-is (trim whitespace).
+- Never add keys that are not in the schema. Respond with JSON only (no prose, code fences or comments).
+
+OUTPUT SCHEMA
+{
+  "lastName": "",
+  "firstName": "",
+  "idNumber": "",
+  "gender": "",
+  "dateOfBirth": {
+    "day": "",
+    "month": "",
+    "year": ""
+  },
+  "address": {
+    "street": "",
+    "houseNumber": "",
+    "entrance": "",
+    "apartment": "",
+    "city": "",
+    "postalCode": "",
+    "poBox": ""
+  },
+  "landlinePhone": "",
+  "mobilePhone": "",
+  "jobType": "",
+  "dateOfInjury": {
+    "day": "",
+    "month": "",
+    "year": ""
+  },
+  "timeOfInjury": "",
+  "accidentLocation": "",
+  "accidentAddress": "",
+  "accidentDescription": "",
+  "injuredBodyPart": "",
+  "signature": "",
+  "formFillingDate": {
+    "day": "",
+    "month": "",
+    "year": ""
+  },
+  "formReceiptDateAtClinic": {
+    "day": "",
+    "month": "",
+    "year": ""
+  },
+  "medicalInstitutionFields": {
+    "healthFundMember": "",
+    "natureOfAccident": "",
+    "medicalDiagnoses": ""
+  }
+}
+
+GUIDANCE
+1) Clean digits of noise like spaces, pipes “|”, and stray punctuation.
+2) If a value repeats, prefer the clearest instance near its label.
+3) If the form is partly Hebrew, still output the JSON with the English keys above.
+4) Return ONLY the JSON object.
+
+TEXT
+"""
+{OCR_TEXT}
+"""

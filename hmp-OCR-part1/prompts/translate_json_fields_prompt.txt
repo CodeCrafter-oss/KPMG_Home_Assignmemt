@@ -1,0 +1,76 @@
+You will receive a JSON object produced by a previous step. Its keys may be in Hebrew, English, or a mixture, and some values may be missing or not normalized.
+
+TASK
+Transform the input into a single JSON object that EXACTLY matches the target English schema below (same keys and nesting). Map any Hebrew keys to the English keys, normalize values, and leave missing values as empty strings. Return JSON only.
+
+TARGET SCHEMA
+{
+  "lastName": "",
+  "firstName": "",
+  "idNumber": "",
+  "gender": "",
+  "dateOfBirth": { "day": "", "month": "", "year": "" },
+  "address": {
+    "street": "", "houseNumber": "", "entrance": "",
+    "apartment": "", "city": "", "postalCode": "", "poBox": ""
+  },
+  "landlinePhone": "",
+  "mobilePhone": "",
+  "jobType": "",
+  "dateOfInjury": { "day": "", "month": "", "year": "" },
+  "timeOfInjury": "",
+  "accidentLocation": "",
+  "accidentAddress": "",
+  "accidentDescription": "",
+  "injuredBodyPart": "",
+  "signature": "",
+  "formFillingDate": { "day": "", "month": "", "year": "" },
+  "formReceiptDateAtClinic": { "day": "", "month": "", "year": "" },
+  "medicalInstitutionFields": {
+    "healthFundMember": "", "natureOfAccident": "", "medicalDiagnoses": ""
+  }
+}
+
+HEBREW→ENGLISH KEY MAPPING
+"שם משפחה" → lastName
+"שם פרטי" → firstName
+"מספר זהות" → idNumber
+"מין" → gender
+"תאריך לידה" → dateOfBirth
+"יום" → day
+"חודש" → month
+"שנה" → year
+"כתובת" → address
+"רחוב" → street
+"מספר בית" → houseNumber
+"כניסה" → entrance
+"דירה" → apartment
+"ישוב" → city
+"מיקוד" → postalCode
+"תא דואר" → poBox
+"טלפון קווי" → landlinePhone
+"טלפון נייד" → mobilePhone
+"סוג העבודה" → jobType
+"תאריך הפגיעה" → dateOfInjury
+"שעת הפגיעה" → timeOfInjury
+"מקום התאונה" → accidentLocation
+"כתובת מקום התאונה" → accidentAddress
+"תיאור התאונה" → accidentDescription
+"האיבר שנפגע" → injuredBodyPart
+"חתימה" → signature
+"תאריך מילוי הטופס" → formFillingDate
+"תאריך קבלת הטופס בקופה" → formReceiptDateAtClinic
+"למילוי ע\"י המוסד הרפואי" → medicalInstitutionFields
+"חבר בקופת חולים" → healthFundMember
+"מהות התאונה" → natureOfAccident
+"אבחנות רפואיות" → medicalDiagnoses
+
+NORMALIZATION RULES
+- Dates: accept DDMMYYYY or noisy variants (with spaces/pipes), then split into day/month/year (zero-pad to two digits).
+- ID: exactly 9 digits; strip non-digits.
+- Phones: keep digits only.
+- If a nested object is missing, create it with empty-string fields.
+- Ignore any extra keys not present in the target schema.
+- Output must be valid JSON with the exact keys above and nothing else.
+
+INPUT JSON (may be imperfect):

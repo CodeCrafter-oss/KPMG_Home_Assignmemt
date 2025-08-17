@@ -1,0 +1,7 @@
+Given the chat so far, extract the final user profile as JSON ONLY.
+- If any field is missing, invalid, or not explicitly confirmed by the user, reply with: {"status":"incomplete"}
+
+Schema:
+{ "firstName":"", "lastName":"", "idNumber":"", "gender":"", "age":0, "hmo":"", "hmoCard":"", "tier":"" }
+
+Return ONLY JSON. No explanations.
